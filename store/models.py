@@ -24,6 +24,33 @@ class Products(models.Model):
 
     def __str__(self):
         return self.product_name
+    
+    @property
+    def offer_price(self):
+        offs=Offers.objects.filter(product=self)
+
+        if offs:
+            off=offs[0]
+            offer_price=self.price-off.discount
+            return offer_price
+        else:
+            return self.price
+        
+
+    @property
+    def p_reviews(self):
+        qs=Reviews.objects.filter(product=self)
+        return qs
+    
+    @property
+    def avg_rating(self):
+        qs=self.p_reviews
+        if qs:
+            total=sum([r.rating for r in qs])
+            return total/len(qs)
+        else:
+            return 0
+
 
 
 class Carts(models.Model):
@@ -70,8 +97,10 @@ class Reviews(models.Model):
 
 class Offers(models.Model):
     product=models.ForeignKey(Products,on_delete=models.CASCADE)
-    discount=models.CharField(max_length=200)
+    discount=models.PositiveIntegerField()
     isAvailable=models.BooleanField(default=True)
+    start_date=models.DateField(default=datetime.date.today)
+    end_date=models.DateField(default=datetime.date.today)
 
 
 

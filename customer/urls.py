@@ -12,6 +12,12 @@ urlpatterns = [
     path("carts/<int:id>/change",views.CartRemoveView.as_view(),name="cart-change"),
     path("orders/add/<int:id>/",views.MakeOrderView.as_view(),name="create-order"),
     path("orders/all",views.MyOrderView.as_view(),name="my-orders"),
+    path("orders/<int:id>/change",views.OrderCancelView.as_view(),name="order-cancel"),
+    path("offers/all",views.DiscountProductsView.as_view(),name="offer-list"),
+    path("reviews/<int:id>/add",views.ReviewCreateView.as_view(),name="review-add"),
+    path("logout",views.signout_view,name="signout"),
+
+
 
 
 ]

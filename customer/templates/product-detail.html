@@ -16,7 +16,8 @@
                 <h1 class="display-5 fw-bolder">{{product.product_name}}</h1>
                 <div class="fs-5 mb-5">
                     
-                    <span>{{product.price }}/-</span>
+                    <span class="text-decoration-line-through">{{product.price }}/-</span>
+                    <span>discount_price:{{product.offer_price}}/-</span>
                     
 
                 </div>
@@ -33,6 +34,16 @@
                 </div>
             </div>
         </div>
+        
+        <h4 class="text-center mt-3">Reviews</h4>
+        <div><h2>Avg rating {{product.avg_rating}}</h2></div>
+        {%for r in product.reviews%}
+           <div class="border rounded-pill">
+            comment:{{r.comment}}
+            rating:{{r.rating}}
+            user:{{r.user}}
+           </div>
+        {%endfor%}   
     </div>
 </section>
 
