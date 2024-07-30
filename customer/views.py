@@ -56,6 +56,25 @@ class SignInView(View):
                 return render(request,"index.html",{"form":form})
             
 
+def signin(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('home')  # Redirect to home page after successful login
+        else:
+            # Return an 'invalid login' error message.
+            return render(request, 'signin.html', {'error': 'Invalid username or password'})
+    else:
+        return render(request, 'signin.html')
+
+def home(request):
+    return render(request, 'home.html')
+
+            
+
 @method_decorator(signin_required,name="dispatch")
 class IndexView(View):
     def get(self,request,*args,**kwargs):
