@@ -1,1 +1,1 @@
-web: gunicorn EKart.wsgi
+web: gunicorn EcommerceWeb.wsgi

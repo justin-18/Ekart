@@ -27,6 +27,7 @@ class SignUpView(View):
         form=RegistrationForm()
         return render(request,"signup.html",{"form":form})
     
+    
     def post(self,request,*args,**kwargs):
         form=RegistrationForm(request.POST)
         if form.is_valid():
